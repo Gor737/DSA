@@ -14,13 +14,13 @@ Sorting is one of the most important topics in Computer Science. It is used to o
 
 Builds the final sorted array one element at a time by inserting each element into its correct position.
 
-* Time Complexity:
+- Time Complexity:
+  - Best: `O(n)`
+  - Average: `O(n²)`
+  - Worst: `O(n²)`
 
-  * Best: `O(n)`
-  * Average: `O(n²)`
-  * Worst: `O(n²)`
-* Space Complexity: `O(1)`
-* Stable: ✅
+- Space Complexity: `O(1)`
+- Stable: ✅
 
 ---
 
@@ -28,13 +28,13 @@ Builds the final sorted array one element at a time by inserting each element in
 
 Repeatedly compares adjacent elements and swaps them if they are in the wrong order.
 
-* Time Complexity:
+- Time Complexity:
+  - Best: `O(n)`
+  - Average: `O(n²)`
+  - Worst: `O(n²)`
 
-  * Best: `O(n)`
-  * Average: `O(n²)`
-  * Worst: `O(n²)`
-* Space Complexity: `O(1)`
-* Stable: ✅
+- Space Complexity: `O(1)`
+- Stable: ✅
 
 ---
 
@@ -42,13 +42,13 @@ Repeatedly compares adjacent elements and swaps them if they are in the wrong or
 
 Finds the minimum element and places it in its correct position during each iteration.
 
-* Time Complexity:
+- Time Complexity:
+  - Best: `O(n²)`
+  - Average: `O(n²)`
+  - Worst: `O(n²)`
 
-  * Best: `O(n²)`
-  * Average: `O(n²)`
-  * Worst: `O(n²)`
-* Space Complexity: `O(1)`
-* Stable: ❌
+- Space Complexity: `O(1)`
+- Stable: ❌
 
 ---
 
@@ -56,10 +56,10 @@ Finds the minimum element and places it in its correct position during each iter
 
 Counts occurrences of each element and reconstructs the sorted sequence.
 
-* Time Complexity: `O(n + k)`
-* Space Complexity: `O(k)`
-* Stable: ✅
-* Non-Comparison Based Sorting
+- Time Complexity: `O(n + k)`
+- Space Complexity: `O(k)`
+- Stable: ❌
+- Non-Comparison Based Sorting
 
 > `k` = range of input values.
 
@@ -71,13 +71,13 @@ Counts occurrences of each element and reconstructs the sorted sequence.
 
 Uses the Divide & Conquer paradigm by recursively splitting the array and merging sorted halves.
 
-* Time Complexity:
+- Time Complexity:
+  - Best: `O(n log n)`
+  - Average: `O(n log n)`
+  - Worst: `O(n log n)`
 
-  * Best: `O(n log n)`
-  * Average: `O(n log n)`
-  * Worst: `O(n log n)`
-* Space Complexity: `O(n)`
-* Stable: ✅
+- Space Complexity: `O(n)`
+- Stable: ✅
 
 ---
 
@@ -85,13 +85,13 @@ Uses the Divide & Conquer paradigm by recursively splitting the array and mergin
 
 Selects a pivot element and partitions the array around it.
 
-* Time Complexity:
+- Time Complexity:
+  - Best: `O(n log n)`
+  - Average: `O(n log n)`
+  - Worst: `O(n²)`
 
-  * Best: `O(n log n)`
-  * Average: `O(n log n)`
-  * Worst: `O(n²)`
-* Space Complexity: `O(log n)`
-* Stable: ❌
+- Space Complexity: `O(log n)`
+- Stable: ❌
 
 ---
 
@@ -99,10 +99,10 @@ Selects a pivot element and partitions the array around it.
 
 An optimized variation of Counting Sort that uses cumulative frequencies to determine the exact position of elements.
 
-* Time Complexity: `O(n + k)`
-* Space Complexity: `O(k)`
-* Stable: ✅
-* Non-Comparison Based Sorting
+- Time Complexity: `O(n + k)`
+- Space Complexity: `O(k)`
+- Stable: ✅
+- Non-Comparison Based Sorting
 
 ---
 
@@ -124,11 +124,11 @@ An optimized variation of Counting Sort that uses cumulative frequencies to dete
 
 This project aims to:
 
-* Understand how sorting algorithms work internally.
-* Compare algorithmic complexities.
-* Learn when to use each sorting technique.
-* Practice Data Structures & Algorithms fundamentals.
-* Build a strong foundation for coding interviews and competitive programming.
+- Understand how sorting algorithms work internally.
+- Compare algorithmic complexities.
+- Learn when to use each sorting technique.
+- Practice Data Structures & Algorithms fundamentals.
+- Build a strong foundation for coding interviews and competitive programming.
 
 ---
 
@@ -153,9 +153,9 @@ Sorting/
 
 There is no universally "best" sorting algorithm.
 
-* Use **Insertion Sort** for small or nearly sorted datasets.
-* Use **Merge Sort** when stability is required.
-* Use **Quick Sort** for fast average-case performance.
-* Use **Counting Sort** when the value range is limited.
+- Use **Insertion Sort** for small or nearly sorted datasets.
+- Use **Merge Sort** when stability is required.
+- Use **Quick Sort** for fast average-case performance.
+- Use **Counting Sort** when the value range is limited.
 
 Choosing the right algorithm depends on the data size, memory constraints, and performance requirements.
