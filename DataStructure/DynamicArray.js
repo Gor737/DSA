@@ -5,7 +5,7 @@
  * Class representing a "Dynamic Array" data structure.
  * Uses a typed array (Uint32Array) as internal storage.
  */
-class DArray {
+export class DArray {
   // Private fields
   /** @private @type {number} Current number of elements in the array */
   #size = 0;
@@ -30,6 +30,23 @@ class DArray {
     else if(initialCapacity <= 0) throw new Error('Capacity negative Error');
     this.#capacity = initialCapacity;
     this.#arr = new Uint32Array(initialCapacity);
+  }
+
+  get size(){
+    return this.#size;
+  }
+  set size(value){
+    if(!Number.isInteger(value)) throw new Error('...');
+    if(value < 0) throw new Error('...');
+    this.#size = value;
+  }
+  get capacity() {
+    return this.#capacity;
+  }
+  set capacity(value){
+    if(!Number.isInteger(value)) throw new Error('...');
+    if(value < 0) throw new Error('...');
+    this.#capacity = value;
   }
 
   /**
@@ -144,14 +161,6 @@ class DArray {
   }
 
   /**
-   * Returns the current capacity of the array.
-   * @returns {number} The capacity.
-   */
-  capacity() {
-    return this.#capacity;
-  }
-
-  /**
    * Makes the object iterable (allows the use of a for...of loop).
    * @returns {Iterator} Iterator object.
    */
@@ -212,6 +221,15 @@ class DArray {
     }
     this.#arr[pos] = value;
     ++this.#size;
+  }
+
+  write(pos, value){
+    // if(typeof pos !== 'number' || !Number.isFinite(pos)) throw new Error('Write position type Error');
+    // else if(pos > this.#size - 1 || pos < 0) throw new Error('Invalid write position');
+    // else if(typeof value !== 'number' || !Number.isFinite(value)) throw new Error('Write value type Error');
+    // if(this.#size === this.#capacity) this.resize(Math.ceil(this.CAP_EXPONENT * this.#capacity));
+
+    this.#arr[pos] = value;
   }
 
   /**
@@ -401,6 +419,15 @@ class DArray {
         if(this.#arr[i] === value) return true;
     }
     return false;
+  }
+
+  replace(newArr){
+    this.#arr = newArr;
+  }
+  read(index){
+    if(index < 0 || index >= this.#capacity) throw new Error("Invalid read index");
+
+    return this.#arr[index];
   }
 }
 
