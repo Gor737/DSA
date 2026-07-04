@@ -1,4 +1,4 @@
-class Queue {
+export class Queue {
     #data;
     #capacity;
     #size;
