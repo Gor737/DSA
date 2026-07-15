@@ -62,13 +62,29 @@ class BST {
     }
 
     delete(value) {
-        // Must remove node with given value if exists
-        // Must preserve BST structure
-        // Must correctly handle 3 cases:
-        //   1) Leaf node
-        //   2) Node with one child
-        //   3) Node with two children
-        // Must decrease size if node removed
+        if(this.is_empty()) return undefined;
+        let curr = this.#root;
+        let parent = null;
+        while(curr || curr.value !== value){
+            parent = curr;
+            if(curr.value > value) curr = curr.left;
+            else curr = curr.right;
+        }
+        if(!curr) return undefined;
+        let value = curr.val;
+        if(!curr.left && !curr.right){
+            if(parent.left === curr) parent.left = null;
+            else parent.right = null;
+        }else if(!curr.left || !curr.right){
+            let child = curr.left ?? curr.right;
+            if(parent.left === curr) parent.left = child;
+            else parent.right = child;
+        }else{
+            const successor = this.find_successor(curr);
+            this.delete(successor);
+            curr.val = successor;
+        }
+        return value;
     }
 
     contains(value) {
@@ -248,25 +264,30 @@ class BST {
 
     /* ================= Advanced Operations ================= */
 
-    find_successor(value) {
-        // Must return inorder successor of node
-        // Smallest value greater than given value
-        // If none → return null
+    find_successor(node) {
+        let curr = node.right;
+        while(curr.left) curr = curr.left;
+        return curr.val;
     }
 
-    find_predecessor(value) {
-        // Must return inorder predecessor of node
-        // Largest value smaller than given value
+    find_predecessor(node) {
+        let curr = node.left;
+        while(curr.right) curr = curr.right;
+        return curr.val;
     }
 
     is_balanced() {
-        // Must return true if tree is height-balanced
-        // |height(left) - height(right)| <= 1 for all nodes
+        let h1 = this.#_get_height(this.#root.left);
+        let h2 = this.#_get_height(this.#root.right);
+        return Math.abs(h1 - h2) <= 1;
     }
 
     validate_BST() {
-        // Must verify tree satisfies BST property
-        // All nodes in left subtree < node < right subtree
+        const data = this.inorder_rec();
+        for(let i = 1; i < data.length; ++i){
+            if(data[i] <= data[i - 1]) return false;
+        }
+        return true;
     }
 
     /* ================= Utilities ================= */
@@ -291,8 +312,15 @@ class BST {
     }
 
     clone() {
-        // Must return deep copy of entire tree
-        // New tree must not share nodes
+        let cloned = new BST();
+        const helper = (node) => {
+            if(!node) return null;
+            cloned.insert(node.value);
+            helper(node.left);
+            helper(node.right);
+        }
+        helper(this.#root);
+        return cloned;
     }
 
     equals(otherTree) {
@@ -308,11 +336,10 @@ class BST {
     /* ================= Iteration ================= */
 
     [Symbol.iterator]() {
-        // Must iterate tree in inorder (sorted order)
-        // Must not modify tree
+        return this.values();
     }
 
-    values() {
+    *values() {
         const stack = [];
         let curr = this.#root;
 
@@ -344,6 +371,13 @@ class BST {
     }
 
     /* ================= Private Helpers ================= */
+    #inorder_nodes_count(node){
+        if(!node) return 0;
+        let c1 = this.#inorder_nodes_count(node.left);
+        let c2 = this.#inorder_nodes_count(node.right);
+        if(node.left || node.right) return 1 + c1 + c2;
+        else return 0;
+    }
 
     #_insert(node, value) {
         // Recursive insertion helper
@@ -358,29 +392,39 @@ class BST {
     #_find_min(node) {
         if(!node.left) return node.value;
         return this.#_find_min(node.left);
-        // Must return minimum value in subtree
     }
 
     #_find_max(node) {
         if(!node.right) return node.value;
         return this.#_find_min(node.right);
-        // Must return maximum value in subtree
     }
 
     #_get_height(node) {
-        // Must compute subtree height recursively
+        if(!node) return 0;
+        let h1 = this.#_get_height(node.left);
+        let h2 = this.#_get_height(node.right);
+        return 1 + Math.max(h1, h2);
     }
 
     #_inorder(node, result) {
-        // Recursive inorder traversal helper
+        if(!node) return null;
+        if(node.left) this.#_inorder(node.left, result);
+        result.push(node.value);
+        if(node.right) this.#_inorder(node.right, result);
     }
 
     #_preorder(node, result) {
-        // Recursive preorder traversal helper
+        if(!node) return null;
+        result.push(node.value);
+        if(node.left) this.#_preorder(node.left, result);
+        if(node.right) this.#_preorder(node.right, result);
     }
 
     #_postorder(node, result) {
-        // Recursive postorder traversal helper
+        if(!node) return null;
+        if(node.left) this.#_postorder(node.left, result);
+        if(node.right) this.#_postorder(node.right, result);
+        result.push(node.value);
     }
 }
 

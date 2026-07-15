@@ -28,7 +28,7 @@ export class Queue {
     enqueue(value){
         if(this.isFull()) this.#grow();
         this.#back =(this.#back + 1) % this.#capacity;
-        this.#data[++this.#back] = value;
+        this.#data[this.#back] = value;
         ++this.#size;
     }
     dequeue(){
